@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void recur(vector<int>& candidates,int start,int target, vector<vector<int>>&result,vector<int>temp)
+    {
+        if(target==0)
+        {
+            result.push_back(temp);
+            return;
+        }
+        for(int i=start;i<candidates.size();i++)
+        {
+            if(target-candidates[i]>=0)
+            {
+                temp.push_back(candidates[i]);
+                recur(candidates,i,target-candidates[i],result,temp);
+                temp.pop_back();
+            }
+        }
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>>result;
+        vector<int>temp;
+        sort(begin(candidates),end(candidates));
+        recur(candidates,0,target,result,temp);
+        return result;
+    }
+};
