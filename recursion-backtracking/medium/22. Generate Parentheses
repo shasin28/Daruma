@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void recur(string s,int o,int c,int n,vector<string>&ans)
+    {
+    //o=open brackets, c=no.of close brackets
+        if(o==n&&c==n)
+        {
+            ans.push_back(s);
+            return;
+        }
+        if(o<n)
+              recur(s+'(',o+1,c,n,ans);
+        if(c<o)
+              recur(s+')',o,c+1,n,ans);
+            
+    }
+    vector<string> generateParenthesis(int n) 
+    {
+        
+       vector<string>ans;
+        recur("(",1,0,n,ans);
+        return ans;
+    }
+};
