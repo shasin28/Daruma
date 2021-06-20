@@ -1,0 +1,95 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+       ListNode *sha,*temp;
+        sha=l1;
+        int carry=0;
+      /*  while(l2)
+        {
+            if(l1)
+            {
+                int tem=l1->val;
+                temp=l1;
+                l1->val=(tem+(l2?l2->val:0)+carry)%10;
+                 carry=(tem+(l2?l2->val:0)+carry)/10;
+                
+            }
+            else
+            {
+            ListNode *curr=new ListNode;
+            temp->next=curr;
+            temp=curr;
+            
+            curr->val=((l2?l2->val:0)+carry)%10;
+            carry=((l2?l2->val:0)+carry)/10;
+                temp=curr;
+            }
+            if(l1)
+            l1=l1->next;
+            if(l2)
+            l2=l2->next;
+            
+        }
+        while(carry!=0)
+        {
+           if(l1)
+           {
+                int tem=l1->val;
+                temp=l1;
+        
+                l1->val=(tem+(l2?l2->val:0)+carry)%10;
+                 carry=(tem+(l2?l2->val:0)+carry)/10;
+               l1=l1->next;
+           }
+            else
+            {
+            ListNode *curr=new ListNode;
+            temp->next=curr;
+            curr->val=carry;
+                carry=0;
+            }
+        }
+        return sha;*/
+        
+        while(l1||l2||carry)
+        {
+            int sum=(l1?l1->val:0)+(l2?l2->val:0)+carry;
+            carry=sum/10;
+            sum%=10;
+            if(l1)
+            {
+                temp=l1;
+                temp->val=sum;
+            }
+            else if(l2)
+            {
+                
+                temp->next=l2;
+                temp=temp->next;
+                temp->val=sum;
+            }
+            else if(sum)
+            {  
+                ListNode *curr=new ListNode();
+                curr->val=sum;
+                temp->next=curr;
+            }
+            if(l1)
+                l1=l1->next;
+            if(l2)
+                l2=l2->next;
+            
+        }
+        return sha;
+    }
+};
