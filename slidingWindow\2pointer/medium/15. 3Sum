@@ -1,0 +1,115 @@
+vector<vector<int>> threeSum(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+    vector<vector<int>> res;
+    for (unsigned int i=0; i<nums.size(); i++) {
+        if ((i>0) && (nums[i]==nums[i-1]))
+            continue;
+        int l = i+1, r = nums.size()-1;
+        while (l<r) {
+            int s = nums[i]+nums[l]+nums[r];
+            if (s>0) r--;
+            else if (s<0) l++;
+            else {
+                res.push_back(vector<int> {nums[i], nums[l], nums[r]});
+                while (nums[l]==nums[l+1]) l++;
+                while (nums[r]==nums[r-1]) r--;
+                l++; r--;
+            }
+        }
+    }
+    return res;
+}
+
+
+
+
+
+
+
+//ugly but works
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+       /*unordered_map<int,int>m;
+        vector<vector<int>>ans;
+        int n=nums.size();
+        if(n<3)
+            return ans;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++)
+        {
+            m[nums[i]]++;
+        }
+        if(m[0]>=3)
+            ans.push_back({0,0,0});
+        auto it=lower_bound(nums.begin(),nums.end(),0);
+        int part=it-nums.begin();
+        for(int i=0;i<part;i++)
+        {
+            if(i>0&&nums[i]==nums[i-1])
+                continue;
+            for(int j=part;j<n;j++)
+            {
+                if(j>0&&nums[j]==nums[j-1])
+                continue;
+                int req=-1*(nums[i]+nums[j]);
+                 if((req>=0&&nums[j]>req)||(req<0&&req<nums[i]))
+                   continue;
+                if(req!=nums[i]&&req!=nums[j]&&m[req])
+                    
+                {
+                    int a=min(nums[i],min(nums[j],req));
+                    int c=max(nums[i],max(nums[j],req));
+                    int b=nums[i]+nums[j]+req-a-c;
+                    ans.push_back({a,b,c});
+                }
+                 else if(req==nums[i]&&m[req]>=2)
+                 {
+                     ans.push_back({nums[i],req,nums[j]});
+                     
+                 }
+                 else if(req==nums[j]&&m[req]>=2)
+                 {
+                     ans.push_back({nums[i],req,nums[j]});
+                     
+                 }
+                
+                
+                
+            }
+        }
+        return ans;
+        */
+         vector<vector<int>>ans;
+        int n=nums.size();
+        if(n<3)
+            return ans;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<n-2;i++)
+        {
+            if(i>0&&nums[i]==nums[i-1])
+                continue;
+            int j=i+1,k=n-1;
+            while(j<k)
+            {
+              
+            
+                   
+                if(nums[i]+nums[j]+nums[k]>0)
+                    k--;
+                else if(nums[i]+nums[j]+nums[k]<0)
+                    j++;
+                    else{
+                     ans.push_back({nums[i],nums[j],nums[k]});
+                        while(j<k&&nums[j+1]==nums[j])
+                        j++;
+                          while(j<k&&nums[k-1]==nums[j])
+                              k--;
+                        j++;k--;
+                    }               
+            }
+        }
+        return ans;
+        
+    }
+};
