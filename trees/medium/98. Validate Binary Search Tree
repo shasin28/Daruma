@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+ //one solution is traversing in iorder manner and see if path obtained is sorted
+ //in this soln--in first go I had missed maxm--minm hook--bst: all nodes to left are smaller&& all nodes to right are greater
+class Solution {
+    
+public:
+      bool isValid(TreeNode* root,long long int minm,long long int maxm) {
+        if(root==NULL)
+            return true;
+        if(root->val>minm&&root->val<maxm&&(!root->left||root->left->val<root->val)&&(!root->right||root->right->val>root->val))
+            return isValid(root->left,minm,root->val)&&isValid(root->right,root->val,maxm);
+        return false;
+        
+    }
+    bool isValidBST(TreeNode* root) {
+       return isValid(root,-1e10,1e10);
+        
+    }
+};
