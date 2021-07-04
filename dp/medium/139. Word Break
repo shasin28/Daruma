@@ -1,23 +1,5 @@
 class Solution {
 public:
-   /* bool found(vector<string>& wordDict,string s,vector<vector<bool>>&dp)
-    {
-        if(s.size()==0)
-            return true;
-        for(int i=1;i<=s.size();i++)
-        {
-            string tem=s.substr(0,i);
-            for(auto u:wordDict)
-            {
-                if(tem==u)
-                {
-                     if(found(wordDict,s.substr(i,s.size()-i)))
-                         return true;
-                }
-            }
-        }
-        return false;
-    }*/
     bool wordBreak(string s, vector<string>& wordDict) {
          if(wordDict.size()==0) return false;
         
@@ -34,14 +16,14 @@ public:
                     if(count(wordDict.begin(),wordDict.end(),word)!=0)
                     {
                         dp[i]=true;
-                        break; //next i
+                        break; 
                     }
                 }
             }
         }
         
         return dp[s.size()];
-       // return found(wordDict,s,dp);
+       
         
     }
 };
