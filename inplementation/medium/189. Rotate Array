@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void reverse(vector<int>& nums, int i,int j)
+    {
+       int bg=i,en=j;
+        while(bg<=j&&en>=i&&bg<en)
+        {
+            swap(nums[bg],nums[en]);
+            bg++;en--;
+        }
+        return;
+    }
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        k=n-k;
+        int i=0;
+        reverse(nums,0,k-1);
+        reverse(nums,k,n-1);
+        reverse(nums,0,n-1);
+        return;
+        
+    }
+    
+};
