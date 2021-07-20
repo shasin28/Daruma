@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool dfs(int i,vector<int>adj[],vector<bool>&vis,vector<bool>&recStack)
+    {
+        if(!vis[i])
+        {
+            vis[i]=true;
+            recStack[i]=true;
+        }
+        for(auto u:adj[i])
+        {
+            if(!vis[u])
+            {
+                 if(dfs(u,adj,vis,recStack))
+                 return true;
+            }
+            if(recStack[u])
+                return true;
+        }
+        recStack[i]=false;
+        return false;
+    }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int>adj[numCourses];
+        for(int i=0;i<prerequisites.size();i++)
+        {
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+        }
+        vector<bool>vis(numCourses,false);
+         vector<bool>recStack(numCourses,false);
+        for(int i=0;i<numCourses;i++)
+        {
+            
+            
+                if(dfs(i,adj,vis,recStack))
+                 return false;
+            
+        }
+        return true;
+        
+    }
+};
