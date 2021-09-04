@@ -1,0 +1,52 @@
+/*
+Given a string str consisting of only lowercase letters. Remove duplicate characters such that in resultant string, every character appears exactly once.
+
+You need to print the lexicographical smallest string among all possible strings.
+*/
+
+//my status --passed cdeac->cdea --first attempt a soln that didn't pass deade-- correct:ade my soln dae---
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class DistinctLettersName {
+public:
+	string getDistinctLetterString(string S) {
+		// MAP to find occurrences of each characters
+        // inStk to check character is present in the stack or not
+		unordered_map<char, int> MAP, inStk;
+		for(auto it : S) {
+		  	MAP[it] ++;
+		  	inStk[it] = 0;
+		}
+	  	// stk to perform the operations
+		stack<char> stk;
+		for(auto it : S) {
+		  	// if char(it) is not in stk
+		  	if(!inStk[it]) {
+			  	// if top character is greater than current character
+				// and have a frequency greater than 1 then perform pop() 
+				while(!stk.empty() and stk.top() > it and MAP[stk.top()] > 1) {
+			  		MAP[stk.top()] --;
+				    // remove top() from inStk
+			  		inStk[stk.top()] = 0;
+			  		stk.pop();
+				}
+			    // push current character into the stack
+				stk.push(it);
+				inStk[it] = 1;
+		  	}
+		  	else 
+			    // if the same currrent character is already in the stack 
+  				// then no need to consider this character
+				MAP[it] --;
+		}
+		string str = "";
+		while(!stk.empty()) {
+		  	str = stk.top() + str;
+		  	stk.pop();
+		}
+		return str;
+	}
+};
