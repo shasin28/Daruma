@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+   // freopen("input.txt","r",stdin);
+    //freopen("outpt.txt","w",stdout);
+    int t;
+    cin>>t;
+    int k=1;
+    while(k<=t)
+    {
+       string s;
+       cin>>s;
+       int arr[26];
+       for(int i=0;i<26;i++)
+       arr[i]=0;
+       int n=s.size();
+       for(int i=0;i<n;i++)
+       {
+           arr[s[i]-'A']++;
+       }
+       int cmax=0,vmax=0,cc=0,vv=0;
+       for(int i=0;i<26;i++)
+       {
+          char sh='A'+i;
+          int nn=arr[i];
+          if(sh=='A'||sh=='I'||sh=='E'||sh=='O'||sh=='U')
+          {
+                cc+=nn;
+                cmax=max(cmax,nn);
+          }
+          else{
+              vv+=nn;
+              vmax=max(vmax,nn);
+          }
+       }
+       int ans=min(vv+2*(cc-cmax),cc+2*(vv-vmax));
+       cout<<"Case #"<<k<<": "<<ans<<"\n";
+       k++;
+    }
+    return 0;
+
+}
